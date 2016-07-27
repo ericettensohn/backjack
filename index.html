@@ -20,8 +20,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4 col-sm-offset-4 well score-wrapper">
-				Player: <span class="player-score">0</span>
-				Dealer: <span class="dealer-score">0</span>
+				<div class="btn-group">
+					<button class="btn btn-default disabled">Player</button>
+					<button class="btn btn-default disabled player-score">0</button>
+					<button class="btn btn-default disabled">Dealer</button>
+					<button class="btn btn-default disabled dealer-score">0</button>
+				</div>
 			</div>
 			
 		</div>
@@ -50,7 +54,7 @@
 						
 						<!-- dealer total, left -->
 						<div class="col-sm-3 dealer-total">
-							<p><span class="dealer-total-number fade-in-pre" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="top" tabindex="-1" data-title="Hand Over" data-content="Dealer Won :(" >?</span><span class="bracket">{</span></p>
+							<p><span class="dealer-total-number fade-in-pre" data-container="body" data-toggle="popover" data-placement="top" tabindex="-1" data-title="Hand Over" data-content="Dealer Won :(" >?</span><span class="bracket">{</span></p>
 						</div>
 
 						<!-- dealer cards, right -->
@@ -82,7 +86,7 @@
 
 						<!-- player total, left -->
 						<div class="col-sm-3 player-total" >
-							<p><span class="bracket">}</span><span class="player-total-number" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Player Won!">0</span></p>
+							<p><span class="bracket">}</span><span class="player-total-number" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Player Won!" data-title="Hand Over">0</span></p>
 						</div>
 
 						

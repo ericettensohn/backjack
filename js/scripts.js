@@ -1,15 +1,3 @@
-// set nessages after game over
-// design
-// fix face cards
-// fix aces
-// player can hit forever
-// no win counter
-// cards arent red or black
-// cards dont look good
-// no delay on showing cards
-// dealers 2nd card is visible on deal
-
-
 
 // when the user clicks deal - deal
 
@@ -33,11 +21,9 @@ $(document).ready(function() {
   		$('[data-toggle="popover"]').popover()
 	})
 
-
 	$(".deal-button").click(function(){
 		createDeck(); // create array of 1H-13c
 		shuffleDeck();
-
 
 		playersHand.push(theDeck[0]);
 		placeCard('player', 'one', theDeck[0]);
@@ -88,13 +74,8 @@ $(document).ready(function() {
 			topOfTheDeck ++;
 		}
 		if (playerTotal >= 21) {
-			
-
 			checkWin()
 		}
-
-		
-
 
 	}); // hit button listener
 
@@ -151,10 +132,8 @@ $(document).ready(function() {
 
 		$('.reset-button').removeClass('slide')
 
-
 		$(".dealer-total-number").popover('destroy');
 		$(".player-total-number").popover('destroy');
-
 
 		$('.deal-button').prop("disabled", false);
 		$('.bet-add').prop("disabled", false);
@@ -166,11 +145,13 @@ $(document).ready(function() {
 	});
 
 	$('.bet-add').click(function() {
-		bet++;
-		$('.bet-amount').text(bet)
-		balance--
+		if (balance > 0) {
+			bet++;
+			$('.bet-amount').text(bet);
+			balance--;
 
-		$('.balance').text(balance)
+			$('.balance').text(balance);
+		}
 	});
 
 	$('.bet-subtract').click(function() {
@@ -184,11 +165,14 @@ $(document).ready(function() {
 	});
 
 	$('.bet-add-10').click(function() {
-		bet += 10;
-		$('.bet-amount').text(bet)
-		balance -= 10;
+		
+		if (balance > 9) {
+			bet += 10;
+			$('.bet-amount').text(bet)
+			balance -= 10;
 
-		$('.balance').text(balance)
+			$('.balance').text(balance)
+		}
 	});
 
 	$('.bet-subtract-10').click(function() {
@@ -209,9 +193,10 @@ function checkWin() {
 
 	if(playerTotal > 21) {
 		// player has busted
-
 		result = "Player bust!"
-		$(".dealer-total-number").popover('show');
+		$('.player-total-number').attr("data-content", result)
+		$(".player-total-number").popover('show');
+		$('.dealer-cards .card').addClass('border-green')
 		
 		// $('.dealer-cards').addClass('border-green');
 		dealerScore++;
@@ -220,7 +205,8 @@ function checkWin() {
 	else if (dealerTotal > 21) {
 		// dealer has busted
 		result = "Dealer bust!"
-		$(".player-total-number").popover('show');
+		$('.dealer-total-number').attr("data-content", result)
+		$(".dealer-total-number").popover('show');
 		playerScore++
 		balance += bet;
 	}
@@ -229,6 +215,7 @@ function checkWin() {
 		if(playerTotal > dealerTotal) {
 			// player won
 			result = "Player win!"
+			$('.player-total-number').attr("data-content", result)
 			$(".player-total-number").popover('show');
 			playerScore++
 			balance += bet;
@@ -236,17 +223,25 @@ function checkWin() {
 		else if (dealerTotal > playerTotal) {
 			// dealer won
 			result = "Dealer win!"
+			$('.dealer-total-number').attr("data-content", result)
 			$(".dealer-total-number").popover('show');
 			dealerScore++;
 		}
 		else {
 			// tie
-			result = "tie"
+			result = "tie";
+			$('.player-total-number').attr("data-content", result)
+			$('.dealer-total-number').attr("data-content", result)
+			$(".player-total-number").popover('show');
+			$(".dealer-total-number").popover('show');
+			
 		}
 	}
 	
 	if (result !== '') {
+		
 		$('.dealer-total-number').addClass('fade-in-post');
+
 	}
 
 	$('.balance').text(balance)
@@ -267,10 +262,6 @@ function checkWin() {
 
 function placeCard(who, where, cardToPlace) {
 	var classSelector = '.' + who + '-cards .card-' + where;
-	
-
-
-	// fix face card issue
 
 	var cardPass = cardToPlace.slice(0, -1);
 
@@ -301,8 +292,6 @@ function placeCard(who, where, cardToPlace) {
 		$(classSelector).append('<img src="img/diamond.jpg">');
 		$(classSelector).addClass("red")
 	}
-
-
 
 }
 
@@ -352,8 +341,6 @@ function calculateTotal(hand, whosTurn) {
 			playerTotal = total;
 		}
 	}
-
-	
 
 	// set player OR dealer total number
 	var elementToUpdate = '.' + whosTurn + '-total-number';
