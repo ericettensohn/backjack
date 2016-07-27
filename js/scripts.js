@@ -14,19 +14,20 @@
 // when the user clicks deal - deal
 
 	var theDeck = [];
-	// var playerTotal = 0;
-	// var dealerTotal = 0;
 	var playersHand = [];
 	var dealersHand = [];
 	var topOfTheDeck = 4;
 	var dealerTotal = 0;
 	var playerTotal = 0;
 
+	var playerScore = 0;
+	var dealerScore = 0;
+
 $(document).ready(function() {
 
 	
 	$(function () {
-  		$('[data-toggle="tooltip"]').tooltip()
+  		$('[data-toggle="popover"]').popover()
 	})
 
 
@@ -47,10 +48,13 @@ $(document).ready(function() {
 		dealersHand.push(theDeck[3]);
 		placeCard('dealer', 'two', theDeck[3]);
 		$('.dealer-cards .card-two').addClass('card-reverse');
+		$('.dealer-cards .card-two').addClass("hidden-text")
 		$('.dealer-cards .card-two').children().hide();
 
 		calculateTotal(playersHand, "player");
 		calculateTotal(dealersHand, "dealer");
+
+		$('.deal-button').prop("disabled", "true");
 
 	}); // deal button listener
 
@@ -108,17 +112,42 @@ $(document).ready(function() {
 			dealerTotal = calculateTotal(dealersHand, 'dealer');
 			topOfTheDeck++;
 		}
+		$('.dealer-cards .card-two').removeClass('card-reverse');
+		$('.dealer-cards .card-two').removeClass("hidden-text")
+		$('.dealer-cards .card-two').children().show();
 
 		// dealer has at least 17, check to see who won
 		checkWin();
 
 	}); // stand button listener
+
+	$('.reset-button').click(function() {
+		theDeck = [];
+		playersHand = [];
+		dealersHand = [];
+		topOfTheDeck = 4;
+		dealerTotal = 0;
+		playerTotal = 0;
+
+		$('.player-total-number').text(playerTotal);
+		$('.dealer-total-number').text(dealerTotal);
+
+		$('.card').removeClass('red');
+		$('.card').removeClass('black');
+		$('.card').addClass('wait');
+
+		$('.card').text('');
+
+		$('.reset-button').removeClass('slide')
+
+		$(".dealer-total-number").popover('destroy');
+
+		$('.deal-button').prop("disabled", false);
+	});
+
 });
 
 function checkWin() {
-	// playerTotal = calculateTotal(playersHand, 'player');
-	// dealerTotal = calculateTotal(dealersHand, 'dealer');
-
 
 	var result;
 
@@ -127,12 +156,14 @@ function checkWin() {
 
 		result = "player bust"
 		$(".dealer-total-number").popover('show');
+		dealerScore++;
 
 	}
 	else if (dealerTotal > 21) {
 		// dealer has busted
 		result = "dealer bust"
 		$(".player-total-number").popover('show');
+		playerScore++
 	}
 	else {
 		// neither player has more than 21
@@ -140,11 +171,13 @@ function checkWin() {
 			// player won
 			result = "player won"
 			$(".player-total-number").popover('show');
+			playerScore++
 		}
 		else if (dealerTotal > playerTotal) {
 			// dealer won
 			result = "dealer won"
 			$(".dealer-total-number").popover('show');
+			dealerScore++;
 		}
 		else {
 			// tie
@@ -152,8 +185,18 @@ function checkWin() {
 		}
 	}
 	$('.game-result').html(result)
-	return result;
 
+	$('.dealer-score').text(dealerScore);
+	$('.player-score').text(playerScore);
+
+	$('.dealer-cards .card-two').removeClass('card-reverse');
+	$('.dealer-cards .card-two').removeClass("hidden-text")
+	$('.dealer-cards .card-two').children().show();
+
+	$('.reset-button').removeClass('hidden')
+	$('.reset-button').addClass('slide')
+
+	return result;
 }
 
 function placeCard(who, where, cardToPlace) {
@@ -177,6 +220,7 @@ function placeCard(who, where, cardToPlace) {
 
 	$(classSelector).html(cardPass);
 	$(classSelector).removeClass('card-reverse')
+	$(classSelector).removeClass('wait')
 
 	if (cardToPlace.indexOf('h') > -1) {
 		$(classSelector).append('<img src="img/heart.jpg">');
@@ -219,30 +263,28 @@ function shuffleDeck() {
 function calculateTotal(hand, whosTurn) {
 	var cardValue = 0;
 	var total = 0;
+	var hasAce = false;
+	
 	for(var i = 0; i < hand.length; i++) {
 		cardValue = Number(hand[i].slice(0, -1))
 
-		if(cardValue == 1 && (total + 1) <= 21) {
+		if((cardValue == 1) && ((total + 11) <= 21)) {
 			cardValue = 11;
-		
-		} else if (cardValue > 10) {
+			hasAce = true;
+		}
+		else if(cardValue > 10) {
 			cardValue = 10;
-				
-		} else if (cardValue == 1 && (total + 11) > 21)
-
-			cardValue = 1;
-		// if (playerTotal > 21 && aceSearch(hand) == true) {
-		// 	playerTotal = total - 10;
-		// }
-		total += cardValue;
-		console.log("total" + total)
-
-		// console.log(playerTotal)
-	}
+		}
+		else if((cardValue + total > 21) && (hasAce)) {
+			total -= total - 10;
+			hasAce = false
+		}
 	
-
-	if (whosTurn == 'player') {
-		playerTotal = total;
+		total += cardValue;
+	
+		if (whosTurn == 'player') {
+			playerTotal = total;
+		}
 	}
 
 	
@@ -253,12 +295,13 @@ function calculateTotal(hand, whosTurn) {
 	return total;
 }
 
-function aceSearch(hand) {
-	var aceFound = false;
-	for (var i = 0; i < playersHand.length; i++) {
-		if((playerTotal + 11) > parseInt(hand[i]) == 1) {
-			aceFound = true;
-		}
-	}
-	return aceFound;
-}
+// function aceSearch(hand) {
+// 	var aceFound = false;
+// 	for (var i = 0; i < playersHand.length; i++) {
+// 		if((playerTotal + 11) > parseInt(hand[i]) == 1) {
+// 			aceFound = true;
+// 		}
+// 	}
+// 	return aceFound;
+// }
+

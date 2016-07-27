@@ -1,12 +1,13 @@
 body {
-	background-color: #ddd;
+	background-color: #fff;
+	padding-top: 50px;
 }
 
 .the-table {
 	/* background-color: green;
 	border: 5px solid #663300;
 	border-radius: 10px; */
-	margin-top: 30px;
+	margin-top: 0;
 	padding: 30px 0;
 }
 
@@ -69,7 +70,7 @@ body {
 
 .player-total p {
 	float: left;
-	margin-left: -25px;
+	margin-left: -10px;
 }
 
 .bracket {
@@ -93,15 +94,17 @@ body {
 
 .action-bar {
 	padding: 0px;
-	border: 1px 0 1px 1px solid #e3e3e3;
+/* 	border: 1px 0 1px 1px solid #e3e3e3; */
 	margin-top: 120px;
 	margin-right: 15px;
 	z-index: 0;
+	background-color: white;
+	position: relative;
 }
 
 .action-bar button {
 	margin-top: 0;
-	background-color: #eee;
+/* 	background-color: #eee; */
 	border-right: none;
 	border-top-right-radius: 0px !important;
 	border-bottom-right-radius: 0px !important;
@@ -126,4 +129,59 @@ body {
 	  #465298 10px,
 	  #465298 20px
 	);
+}
+
+.wait {
+	opacity: 0;
+}
+
+.player-cards {
+	border: 1px solid #ccc;
+	border-left: none;
+	min-height: 130px;
+	padding-right: 0px;
+	padding-left: 40px;
+
+
+
+}
+
+.dealer-cards {
+	border: 1px solid #ccc;
+	border-right: none;
+	min-height: 130px;
+	margin-bottom: 20px;
+
+}
+
+.hidden-text {
+	color: transparent;
+	border: none;
+}
+
+.score-wrapper {
+	margin-bottom: 0;
+	border-bottom: 0;
+	padding: 5px;
+	text-align: center;
+}
+
+.reset-button {
+	margin-top: 25px !important;
+	left: 100px;
+}
+
+.slide {
+    position: absolute;
+    transition: 1s;
+    left: 0;
+
+}
+
+.player-score {
+	margin-right: 30px;
+}
+
+.border-green {
+	border: green;
 }
