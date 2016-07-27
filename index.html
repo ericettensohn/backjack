@@ -9,6 +9,8 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 	<script type="text/javascript" src="js/scripts.js"></script>
 </head>
 <body>
@@ -17,14 +19,28 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="the-table col-sm-9 col-sm-offset-1">
+			<div class="action-bar col-sm-1 well">
+				<div class="row player-actions">
+					<div class="col-sm-12">
+						<div class="btn-group-vertical" role="group" aria-label="...">
+							<button class="deal-button btn btn-default btn-lg">Deal</button>
+						
+							<button class="hit-button btn btn-default btn-lg">Hit</button>
+					
+							<button class="stand-button btn btn-default btn-lg">Stand</button>
+						</div>
+					</div>
+				</div> <!-- player actions -->
+			</div>
+
+			<div class="the-table col-sm-9 well">
 				<!-- 	create dealer's hand -->
 				<div class="row">
 					<div class="col-sm-12 dealer-hand-wrapper">
 						
 						<!-- dealer total, left -->
 						<div class="col-sm-3 dealer-total">
-							Dealer Total <span class="dealer-total-number">0</span>
+							<p><span class="dealer-total-number" data-container="body" data-toggle="popover" data-placement="top" data-content="Dealer Won :(">0</span><span class="bracket">{</span></p>
 						</div>
 
 						<!-- dealer cards, right -->
@@ -43,11 +59,7 @@
 				<div class="row">
 					<div class="col-sm-12 player-hand-wrapper">
 						
-						<!-- player total, left -->
-						<div class="col-sm-3 player-total">
-							Player Total <span class="player-total-number">0</span>
-						</div>
-
+							
 						<!-- player cards, right -->
 						<div class="col-sm-9 player-cards">
 							<div class="col-sm-2 card card-one"></div>
@@ -57,22 +69,16 @@
 							<div class="col-sm-2 card card-five"></div>
 							<div class="col-sm-2 card card-six"></div>
 						</div> <!-- player cards -->
+
+						<!-- player total, left -->
+						<div class="col-sm-3 player-total" >
+							<p><span class="bracket">}</span><span class="player-total-number" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Player Won!">0</span></p>
+						</div>
+
+						
 					</div> <!-- player wrapper -->
 				</div> <!-- row -->
 				
-				<div class="row player-actions">
-					<div class="col-sm-2 col-sm-offset-2">
-						<button class="deal-button">Deal</button>
-					</div>
-					<div class="col-sm-2 col-sm-offset-1">
-						<button class="hit-button">Hit</button>
-					</div>
-					<div class="col-sm-2 col-sm-offset-1">
-						<button class="stand-button">Stand</button>
-					</div>
-				</div> <!-- player actions -->
-				
-				<div class="col-sm-12 game-result">
 					
 				</div>
 			</div> <!-- the table -->

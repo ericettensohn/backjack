@@ -25,7 +25,9 @@
 $(document).ready(function() {
 
 	
-
+	$(function () {
+  		$('[data-toggle="tooltip"]').tooltip()
+	})
 
 
 	$(".deal-button").click(function(){
@@ -44,6 +46,8 @@ $(document).ready(function() {
 		
 		dealersHand.push(theDeck[3]);
 		placeCard('dealer', 'two', theDeck[3]);
+		$('.dealer-cards .card-two').addClass('card-reverse');
+		$('.dealer-cards .card-two').children().hide();
 
 		calculateTotal(playersHand, "player");
 		calculateTotal(dealersHand, "dealer");
@@ -112,9 +116,9 @@ $(document).ready(function() {
 });
 
 function checkWin() {
-	playerTotal = calculateTotal(playersHand, 'player');
-	dealerTotal = calculateTotal(dealersHand, 'dealer');
-	console.log(playerTotal)
+	// playerTotal = calculateTotal(playersHand, 'player');
+	// dealerTotal = calculateTotal(dealersHand, 'dealer');
+
 
 	var result;
 
@@ -122,21 +126,25 @@ function checkWin() {
 		// player has busted
 
 		result = "player bust"
+		$(".dealer-total-number").popover('show');
 
 	}
 	else if (dealerTotal > 21) {
 		// dealer has busted
 		result = "dealer bust"
+		$(".player-total-number").popover('show');
 	}
 	else {
 		// neither player has more than 21
 		if(playerTotal > dealerTotal) {
 			// player won
 			result = "player won"
+			$(".player-total-number").popover('show');
 		}
 		else if (dealerTotal > playerTotal) {
 			// dealer won
 			result = "dealer won"
+			$(".dealer-total-number").popover('show');
 		}
 		else {
 			// tie
@@ -152,9 +160,38 @@ function placeCard(who, where, cardToPlace) {
 	var classSelector = '.' + who + '-cards .card-' + where;
 	
 
+
 	// fix face card issue
 
-	$(classSelector).html(cardToPlace);
+	var cardPass = cardToPlace.slice(0, -1);
+
+	if (cardPass == 11) {
+		cardPass = "J"
+	} else if (cardPass == 12) {
+		cardPass = "Q"
+	} else if (cardPass == 13) {
+		cardPass = "K"
+	} else if (cardPass == 1) {
+		cardPass = "A"
+	}
+
+	$(classSelector).html(cardPass);
+	$(classSelector).removeClass('card-reverse')
+
+	if (cardToPlace.indexOf('h') > -1) {
+		$(classSelector).append('<img src="img/heart.jpg">');
+		$(classSelector).addClass("red")
+	} else if (cardToPlace.indexOf('s') > -1) {
+		$(classSelector).append('<img src="img/spade.jpg">');
+		$(classSelector).addClass("black")
+	} else if (cardToPlace.indexOf('c') > -1) {
+		$(classSelector).append('<img src="img/club.jpg">');
+		$(classSelector).addClass("black")
+	} else if (cardToPlace.indexOf('d') > -1) {
+		$(classSelector).append('<img src="img/diamond.jpg">');
+		$(classSelector).addClass("red")
+	}
+
 
 
 }
@@ -184,20 +221,31 @@ function calculateTotal(hand, whosTurn) {
 	var total = 0;
 	for(var i = 0; i < hand.length; i++) {
 		cardValue = Number(hand[i].slice(0, -1))
-		if(cardValue == 1 && aceSearch() == false) {
-			cardValue = 11
+
+		if(cardValue == 1 && (total + 1) <= 21) {
+			cardValue = 11;
+		
 		} else if (cardValue > 10) {
 			cardValue = 10;
-		} else if (cardValue == 1 && aceSearch() == true) {
-			cardValue = 1;
-		}
+				
+		} else if (cardValue == 1 && (total + 11) > 21)
 
+			cardValue = 1;
+		// if (playerTotal > 21 && aceSearch(hand) == true) {
+		// 	playerTotal = total - 10;
+		// }
 		total += cardValue;
+		console.log("total" + total)
+
+		// console.log(playerTotal)
 	}
+	
 
 	if (whosTurn == 'player') {
 		playerTotal = total;
 	}
+
+	
 
 	// set player OR dealer total number
 	var elementToUpdate = '.' + whosTurn + '-total-number';
@@ -205,12 +253,12 @@ function calculateTotal(hand, whosTurn) {
 	return total;
 }
 
-function aceSearch(array) {
+function aceSearch(hand) {
+	var aceFound = false;
 	for (var i = 0; i < playersHand.length; i++) {
-		if(playerTotal > 21 && (parseInt(playersHand[i]) == 1)) {
-			return true
-		} else {
-			return false
+		if((playerTotal + 11) > parseInt(hand[i]) == 1) {
+			aceFound = true;
 		}
 	}
+	return aceFound;
 }
