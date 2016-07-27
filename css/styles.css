@@ -165,7 +165,6 @@ body {
 }
 
 .slide {
-  /*   position: absolute; */
     transition: 1s;
     left: 0;
 }
