@@ -4,11 +4,11 @@ body {
 }
 
 .the-table {
-	/* background-color: green;
-	border: 5px solid #663300;
-	border-radius: 10px; */
 	margin-top: 0;
 	padding: 30px 0;
+	max-width: 700px;
+	margin-bottom: 0;
+	z-index: 2;
 }
 
 .card {
@@ -17,6 +17,7 @@ body {
 	margin: 5px;
 	width: 13%;
 	color: black;
+	padding-top: 20px;
 }
 
 .dealer-hand-wrapper, .player-hand-wrapper {
@@ -30,14 +31,8 @@ body {
 }
 
 .player-actions button {
-/* 	background-color: black; */
 	width: 100px;
 	margin-top: 20px;
-/* 	color: white; */
-}
-
-.card {
-	padding-top: 20px;
 }
 
 .card img {
@@ -54,18 +49,12 @@ body {
 	border: 1px solid black;
 }
 
-.dealer-total span {
-	display: inline;
-
-}
-
-.player-total span {
+.dealer-total span, .player-total span {
 	display: inline;
 }
 
 .dealer-total p {
 	float: right;
-
 }
 
 .player-total p {
@@ -75,16 +64,11 @@ body {
 
 .bracket {
 	font-size: 80px;
-	
-	
 }
 
 .dealer-total-number {
 	margin-right: 10px;
-/* 	margin-bottom: 50px; */
 	font-size: 50px;
-/* 	float: right; */
-/* 	clear: both; */
 }
 
 .player-total-number {
@@ -94,7 +78,6 @@ body {
 
 .action-bar {
 	padding: 0px;
-/* 	border: 1px 0 1px 1px solid #e3e3e3; */
 	margin-top: 120px;
 	margin-right: 15px;
 	z-index: 0;
@@ -104,21 +87,14 @@ body {
 
 .action-bar button {
 	margin-top: 0;
-/* 	background-color: #eee; */
 	border-right: none;
 	border-top-right-radius: 0px !important;
 	border-bottom-right-radius: 0px !important;
 	outline: none;
 }
 
-.action-bar button:active {
-	outline: none !important;
-	
-}
-
 .action-bar button:focus {
 	outline: none !important;
-	
 }
 
 .card-reverse {
@@ -141,9 +117,6 @@ body {
 	min-height: 130px;
 	padding-right: 0px;
 	padding-left: 40px;
-
-
-
 }
 
 .dealer-cards {
@@ -151,7 +124,6 @@ body {
 	border-right: none;
 	min-height: 130px;
 	margin-bottom: 20px;
-
 }
 
 .hidden-text {
@@ -175,7 +147,6 @@ body {
     position: absolute;
     transition: 1s;
     left: 0;
-
 }
 
 .player-score {
@@ -183,5 +154,34 @@ body {
 }
 
 .border-green {
-	border: green;
+	border-color: green;
+}
+
+.bet-wrapper {
+	margin-top: -5px;
+	z-index: 0;
+	padding: 15px 5px 15px 5px;
+}
+
+.bet-wrapper button {
+}
+
+.bet-amount {
+
+	font-size: 14px;
+}
+
+button:focus {
+	outline: none !important;
+}
+
+.fade-in-pre {
+	opacity: 0;
+	transition: opacity 0.5s ease-in;
+}
+
+.fade-in-post {
+	
+	opacity: 1;
+
 }

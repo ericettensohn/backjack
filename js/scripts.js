@@ -23,6 +23,9 @@
 	var playerScore = 0;
 	var dealerScore = 0;
 
+	var bet = 0;
+	var balance = 100;
+
 $(document).ready(function() {
 
 	
@@ -55,6 +58,10 @@ $(document).ready(function() {
 		calculateTotal(dealersHand, "dealer");
 
 		$('.deal-button').prop("disabled", "true");
+		$('.bet-add').prop("disabled", true);
+		$('.bet-subtract').prop("disabled", true);
+		$('.bet-add-10').prop("disabled", true);
+		$('.bet-subtract-10').prop("disabled", true);
 
 	}); // deal button listener
 
@@ -116,6 +123,8 @@ $(document).ready(function() {
 		$('.dealer-cards .card-two').removeClass("hidden-text")
 		$('.dealer-cards .card-two').children().show();
 
+		$('.dealer-total-number').addClass('fade-in-post');
+
 		// dealer has at least 17, check to see who won
 		checkWin();
 
@@ -128,8 +137,10 @@ $(document).ready(function() {
 		topOfTheDeck = 4;
 		dealerTotal = 0;
 		playerTotal = 0;
+		bet = 0;
 
 		$('.player-total-number').text(playerTotal);
+		$('.dealer-total-number').removeClass('fade-in-post');
 		$('.dealer-total-number').text(dealerTotal);
 
 		$('.card').removeClass('red');
@@ -140,9 +151,54 @@ $(document).ready(function() {
 
 		$('.reset-button').removeClass('slide')
 
+
 		$(".dealer-total-number").popover('destroy');
+		$(".player-total-number").popover('destroy');
+
 
 		$('.deal-button').prop("disabled", false);
+		$('.bet-add').prop("disabled", false);
+		$('.bet-subtract').prop("disabled", false);
+		$('.bet-add-10').prop("disabled", false);
+		$('.bet-subtract-10').prop("disabled", false);
+
+
+	});
+
+	$('.bet-add').click(function() {
+		bet++;
+		$('.bet-amount').text(bet)
+		balance--
+
+		$('.balance').text(balance)
+	});
+
+	$('.bet-subtract').click(function() {
+		if (bet > 0) {
+			balance++
+			bet--;
+		}
+		
+		$('.bet-amount').text(bet)
+		$('.balance').text(balance)
+	});
+
+	$('.bet-add-10').click(function() {
+		bet += 10;
+		$('.bet-amount').text(bet)
+		balance -= 10;
+
+		$('.balance').text(balance)
+	});
+
+	$('.bet-subtract-10').click(function() {
+		if (bet > 0) {
+			balance += 10;
+			bet -= 10;
+		}
+		
+		$('.bet-amount').text(bet)
+		$('.balance').text(balance)
 	});
 
 });
@@ -154,28 +210,32 @@ function checkWin() {
 	if(playerTotal > 21) {
 		// player has busted
 
-		result = "player bust"
+		result = "Player bust!"
 		$(".dealer-total-number").popover('show');
+		
+		// $('.dealer-cards').addClass('border-green');
 		dealerScore++;
 
 	}
 	else if (dealerTotal > 21) {
 		// dealer has busted
-		result = "dealer bust"
+		result = "Dealer bust!"
 		$(".player-total-number").popover('show');
 		playerScore++
+		balance += bet;
 	}
 	else {
 		// neither player has more than 21
 		if(playerTotal > dealerTotal) {
 			// player won
-			result = "player won"
+			result = "Player win!"
 			$(".player-total-number").popover('show');
 			playerScore++
+			balance += bet;
 		}
 		else if (dealerTotal > playerTotal) {
 			// dealer won
-			result = "dealer won"
+			result = "Dealer win!"
 			$(".dealer-total-number").popover('show');
 			dealerScore++;
 		}
@@ -184,8 +244,12 @@ function checkWin() {
 			result = "tie"
 		}
 	}
-	$('.game-result').html(result)
+	
+	if (result !== '') {
+		$('.dealer-total-number').addClass('fade-in-post');
+	}
 
+	$('.balance').text(balance)
 	$('.dealer-score').text(dealerScore);
 	$('.player-score').text(playerScore);
 
@@ -195,6 +259,8 @@ function checkWin() {
 
 	$('.reset-button').removeClass('hidden')
 	$('.reset-button').addClass('slide')
+
+	$('.bet-amount').text('0')
 
 	return result;
 }
@@ -276,7 +342,7 @@ function calculateTotal(hand, whosTurn) {
 			cardValue = 10;
 		}
 		else if((cardValue + total > 21) && (hasAce)) {
-			total -= total - 10;
+			total -= 10;
 			hasAce = false
 		}
 	
@@ -294,14 +360,4 @@ function calculateTotal(hand, whosTurn) {
 	$(elementToUpdate).html(total);
 	return total;
 }
-
-// function aceSearch(hand) {
-// 	var aceFound = false;
-// 	for (var i = 0; i < playersHand.length; i++) {
-// 		if((playerTotal + 11) > parseInt(hand[i]) == 1) {
-// 			aceFound = true;
-// 		}
-// 	}
-// 	return aceFound;
-// }
 
