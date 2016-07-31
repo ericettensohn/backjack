@@ -3,10 +3,14 @@ body {
 	padding-top: 50px;
 }
 
+.container {
+	width: 750px;
+}
+
 .the-table {
 	margin-top: 0;
 	padding: 30px 0;
-	max-width: 700px;
+	width: 562.5px;
 	margin-bottom: 0;
 	z-index: 2;
 }
@@ -98,8 +102,6 @@ body {
 	margin-top: 0;
 	border-right: none;
 	border-radius: 5px 0px 0px 5px !important;
-/* 	border-top-right-radius: 0px !important;
-	border-bottom-right-radius: 0px !important; */
 	outline: none;
 }
 
@@ -128,9 +130,6 @@ body {
 	padding-right: 0px;
 	padding-left: 40px;
 }
-
-
-
 
 .dealer-cards {
 	border: 1px solid #ccc;
@@ -173,13 +172,16 @@ body {
 	margin-right: 30px;
 }
 
+.bet-row {
 
+}
 
 .bet-wrapper {
 	margin-top: -5px;
 	z-index: 0;
 	padding: 15px 5px 15px 5px;
 	background-color: #ededed;
+	width: 500px;
 
 }
 

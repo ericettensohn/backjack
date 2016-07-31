@@ -208,7 +208,7 @@ function checkWin() {
 		$('.dealer-total-number').attr("data-content", result)
 		$(".dealer-total-number").popover('show');
 		playerScore++
-		balance += bet;
+		balance += (bet * 2);
 	}
 	else {
 		// neither player has more than 21
@@ -218,7 +218,7 @@ function checkWin() {
 			$('.player-total-number').attr("data-content", result)
 			$(".player-total-number").popover('show');
 			playerScore++
-			balance += bet;
+			balance += (bet * 2);
 		}
 		else if (dealerTotal > playerTotal) {
 			// dealer won
