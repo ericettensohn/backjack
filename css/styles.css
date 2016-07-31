@@ -12,7 +12,7 @@ body {
 	padding: 30px 0;
 	width: 562.5px;
 	margin-bottom: 0;
-	z-index: 2;
+	z-index: 3;
 }
 
 .card {
@@ -28,10 +28,7 @@ body {
 .dealer-hand-wrapper, .player-hand-wrapper {
 	font-size: 18px;
 	text-align: center;
-	
-
 }
-
 
 .dealer-total-number, .player-total-number {
 	display: block;
@@ -75,7 +72,6 @@ body {
 	color: #777;
 }
 
-
 .dealer-total-number {
 	margin-right: 10px;
 	font-size: 55px;
@@ -86,14 +82,11 @@ body {
 	font-size: 60px;
 }
 
-
-
-
 .action-bar {
 	padding: 0px;
 	margin-top: 100px;
 	margin-right: 15px;
-	z-index: 0;
+	z-index: 2;
 	background-color: white;
 	position: relative;
 }
@@ -139,10 +132,6 @@ body {
 	box-sizing: border-box;
 }
 
-/* .border-green {
-	outline: 3px solid blue;
-} */
-
 .hidden-text {
 	color: transparent;
 	border: none;
@@ -172,24 +161,15 @@ body {
 	margin-right: 30px;
 }
 
-.bet-row {
-
-}
-
 .bet-wrapper {
 	margin-top: -5px;
-	z-index: 0;
+	z-index: 2;
 	padding: 15px 5px 15px 5px;
 	background-color: #ededed;
 	width: 500px;
-
-}
-
-.bet-wrapper button {
 }
 
 .bet-amount {
-
 	font-size: 14px;
 }
 
@@ -203,7 +183,5 @@ button:focus {
 }
 
 .fade-in-post {
-	
 	opacity: 1;
-
 }

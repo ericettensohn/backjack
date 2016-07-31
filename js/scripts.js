@@ -16,7 +16,6 @@
 
 $(document).ready(function() {
 
-	
 	$(function () {
   		$('[data-toggle="popover"]').popover()
 	})
@@ -141,7 +140,6 @@ $(document).ready(function() {
 		$('.bet-add-10').prop("disabled", false);
 		$('.bet-subtract-10').prop("disabled", false);
 
-
 	});
 
 	$('.bet-add').click(function() {
@@ -197,10 +195,7 @@ function checkWin() {
 		$('.player-total-number').attr("data-content", result)
 		$(".player-total-number").popover('show');
 		$('.dealer-cards .card').addClass('border-green')
-		
-		// $('.dealer-cards').addClass('border-green');
 		dealerScore++;
-
 	}
 	else if (dealerTotal > 21) {
 		// dealer has busted
@@ -234,7 +229,6 @@ function checkWin() {
 			$('.dealer-total-number').attr("data-content", result)
 			$(".player-total-number").popover('show');
 			$(".dealer-total-number").popover('show');
-			
 		}
 	}
 	
@@ -292,7 +286,6 @@ function placeCard(who, where, cardToPlace) {
 		$(classSelector).append('<img src="img/diamond.jpg">');
 		$(classSelector).addClass("red")
 	}
-
 }
 
 function createDeck() {
