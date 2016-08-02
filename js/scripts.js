@@ -224,11 +224,12 @@ function checkWin() {
 		}
 		else {
 			// tie
-			result = "tie";
+			result = "It's a tie!";
 			$('.player-total-number').attr("data-content", result)
 			$('.dealer-total-number').attr("data-content", result)
 			$(".player-total-number").popover('show');
 			$(".dealer-total-number").popover('show');
+			balance += bet;
 		}
 	}
 	
