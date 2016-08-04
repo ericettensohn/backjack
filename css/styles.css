@@ -166,7 +166,8 @@ body {
 	z-index: 2;
 	padding: 15px 5px 15px 5px;
 	background-color: #ededed;
-	width: 500px;
+	margin-left: 105px;
+
 }
 
 .bet-amount {
@@ -184,4 +185,21 @@ button:focus {
 
 .fade-in-post {
 	opacity: 1;
+}
+
+.dd-wrapper {
+	position: relative;
+	margin: auto;
+}
+
+.dd-button {
+	position: absolute;
+	top: -60px;
+	left: 250px;
+	z-index: 1
+}
+
+.slide-down {
+    transition: 1s;
+    top: -20px;
 }

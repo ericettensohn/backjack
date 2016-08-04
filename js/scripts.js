@@ -48,6 +48,10 @@ $(document).ready(function() {
 		$('.bet-add-10').prop("disabled", true);
 		$('.bet-subtract-10').prop("disabled", true);
 
+		if (playerTotal == 21) {
+			$('.stand-button').trigger('click');
+		}
+
 	}); // deal button listener
 
 	$(".hit-button").click(function(){
@@ -72,9 +76,15 @@ $(document).ready(function() {
 			calculateTotal(playersHand, 'player');
 			topOfTheDeck ++;
 		}
-		if (playerTotal >= 21) {
-			checkWin()
+		
+		if (playerTotal == 21) {
+			$('.stand-button').trigger('click');
 		}
+		else if (playerTotal > 21) {
+			checkWin();
+		} 
+		
+			
 
 	}); // hit button listener
 
@@ -129,12 +139,13 @@ $(document).ready(function() {
 
 		$('.card').text('');
 
-		$('.reset-button').removeClass('slide')
+		$('.reset-button').removeClass('slide');
 
 		$(".dealer-total-number").popover('destroy');
 		$(".player-total-number").popover('destroy');
 
 		$('.deal-button').prop("disabled", false);
+		$('.hit-button').prop("disabled", false);
 		$('.bet-add').prop("disabled", false);
 		$('.bet-subtract').prop("disabled", false);
 		$('.bet-add-10').prop("disabled", false);
@@ -189,7 +200,7 @@ function checkWin() {
 
 	var result;
 
-	if(playerTotal > 21) {
+	if (playerTotal > 21) {
 		// player has busted
 		result = "Player bust!"
 		$('.player-total-number').attr("data-content", result)
@@ -207,12 +218,18 @@ function checkWin() {
 	}
 	else {
 		// neither player has more than 21
-		if(playerTotal > dealerTotal) {
+		if (playerTotal > dealerTotal) {
 			// player won
-			result = "Player win!"
-			$('.player-total-number').attr("data-content", result)
+			
+			if (playerTotal == 21 && playersHand.length == 2) {
+				result = "Player BlackJack!"
+			}
+			else {
+				result = "Player win!"
+			}
+			$('.player-total-number').attr("data-content", result);
 			$(".player-total-number").popover('show');
-			playerScore++
+			playerScore++;
 			balance += (bet * 2);
 		}
 		else if (dealerTotal > playerTotal) {
@@ -222,7 +239,7 @@ function checkWin() {
 			$(".dealer-total-number").popover('show');
 			dealerScore++;
 		}
-		else {
+		else if (playerTotal == dealerTotal) {
 			// tie
 			result = "It's a tie!";
 			$('.player-total-number').attr("data-content", result)
@@ -236,6 +253,7 @@ function checkWin() {
 	if (result !== '') {
 		
 		$('.dealer-total-number').addClass('fade-in-post');
+		$('.hit-button').prop('disabled', true);
 
 	}
 
@@ -339,6 +357,8 @@ function calculateTotal(hand, whosTurn) {
 	// set player OR dealer total number
 	var elementToUpdate = '.' + whosTurn + '-total-number';
 	$(elementToUpdate).html(total);
+
+
 	return total;
 }
 

@@ -19,7 +19,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4 col-sm-offset-4 well score-wrapper">
+			<div class="col-xs-5 col-xs-offset-3 well score-wrapper">
 				<div class="btn-group">
 					<button class="btn btn-default disabled">Player</button>
 					<button class="btn btn-default disabled player-score">0</button>
@@ -31,9 +31,9 @@
 		</div>
 
 		<div class="row">
-			<div class="action-bar col-sm-1">
+			<div class="action-bar col-xs-1">
 				<div class="row player-actions">
-					<div class="col-sm-12">
+					<div class="col-xs-12">
 						<div class="btn-group-vertical" role="group" aria-label="...">
 							<button class="deal-button btn btn-default btn-lg">Deal</button>
 						
@@ -47,45 +47,45 @@
 				</div> <!-- player actions -->
 			</div>
 
-			<div class="the-table col-sm-9 well">
+			<div class="the-table col-xs-9 well">
 				<!-- 	create dealer's hand -->
 				<div class="row">
-					<div class="col-sm-12 dealer-hand-wrapper">
+					<div class="col-xs-12 dealer-hand-wrapper">
 						
 						<!-- dealer total, left -->
-						<div class="col-sm-3 dealer-total">
+						<div class="col-xs-3 dealer-total">
 							<p><span class="dealer-total-number fade-in-pre" data-container="body" data-toggle="popover" data-placement="top" tabindex="-1" data-title="Hand Over" data-content="Dealer Won :(" >?</span><span class="bracket">{</span></p>
 						</div>
 
 						<!-- dealer cards, right -->
-						<div class="col-sm-9 dealer-cards">
-							<div class="col-sm-2 card card-one wait"></div>
-							<div class="col-sm-2 card card-two wait"></div>
-							<div class="col-sm-2 card card-three wait"></div>
-							<div class="col-sm-2 card card-four wait"></div>
-							<div class="col-sm-2 card card-five wait"></div>
-							<div class="col-sm-2 card card-six wait"></div>
+						<div class="col-xs-9 dealer-cards">
+							<div class="col-xs-2 card card-one wait"></div>
+							<div class="col-xs-2 card card-two wait"></div>
+							<div class="col-xs-2 card card-three wait"></div>
+							<div class="col-xs-2 card card-four wait"></div>
+							<div class="col-xs-2 card card-five wait"></div>
+							<div class="col-xs-2 card card-six wait"></div>
 						</div> <!-- dealer cards -->
 					</div> <!-- dealer wrapper -->
 				</div> <!-- row -->
 				
 				<!-- 	create player's hand -->
 				<div class="row">
-					<div class="col-sm-12 player-hand-wrapper">
+					<div class="col-xs-12 player-hand-wrapper">
 						
 							
 						<!-- player cards, right -->
-						<div class="col-sm-9 player-cards">
-							<div class="col-sm-2 card card-six wait"></div>
-							<div class="col-sm-2 card card-five wait"></div>
-							<div class="col-sm-2 card card-four wait"></div>
-							<div class="col-sm-2 card card-three wait"></div>
-							<div class="col-sm-2 card card-two wait"></div>
-							<div class="col-sm-2 card card-one wait"></div>
+						<div class="col-xs-9 player-cards">
+							<div class="col-xs-2 card card-six wait"></div>
+							<div class="col-xs-2 card card-five wait"></div>
+							<div class="col-xs-2 card card-four wait"></div>
+							<div class="col-xs-2 card card-three wait"></div>
+							<div class="col-xs-2 card card-two wait"></div>
+							<div class="col-xs-2 card card-one wait"></div>
 						</div> <!-- player cards -->
 
 						<!-- player total, left -->
-						<div class="col-sm-3 player-total" >
+						<div class="col-xs-3 player-total" >
 							<p><span class="bracket">}</span><span class="player-total-number" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Player Won!" data-title="Hand Over">0</span></p>
 						</div>
 
@@ -96,8 +96,8 @@
 			</div> <!-- the table -->
 
 			<div class="row bet-row">
-				<div class="col-sm-8 col-sm-offset-2 well bet-wrapper">
-					<div class="col-sm-8">
+				<div class="col-xs-8 col-xs-offset-1 well bet-wrapper">
+					<div class="col-xs-8">
 						<div class="btn-group">
 							<button class="btn btn-default disabled">Bet:</button>
 							<button class="btn bet-add-10 btn-default ">+10</button>
@@ -110,12 +110,19 @@
 						</div>
 					</div>
 
-					<div class="col-sm-4">
+					<div class="col-xs-4">
 						<div class="btn-group">
 							<button class="btn btn-default disabled">Balance:</button>
 							<button class="balance btn btn-default disabled">100</balance>
 						</div>	
 					</div>
+
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-xs-2 col-xs-offset-4 dd-wrapper">
+					<button class="btn btn-success dd-button">Double down!</button>
 				</div>
 			</div>
 			
